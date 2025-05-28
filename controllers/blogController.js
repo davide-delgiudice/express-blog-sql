@@ -21,6 +21,7 @@ const index = (req, res) => {
 
 // metodo show del controller
 const show = (req, res) => {
+
     // recupero l'ID
     const id = req.params.id;
 
@@ -65,6 +66,29 @@ const show = (req, res) => {
     })
 };
 
+
+// metodo destroy del controller
+const destroy = (req, res) => {
+
+    // recupero l'ID
+    const id = req.params.id;
+
+    const sql = `
+        DELETE
+        FROM posts
+        WHERE id = ?
+    `
+    // eseguo la query restituendo solo il codice di stato per il metodo DESTROY
+    connection.query(sql, [id], (err) => {
+        if(err) {
+            return res.status(500).json({error: "Database query failed"+err});
+        }
+
+        res.sendStatus(204);
+    })
+};
+
+
 module.exports = {
-    index, show
+    index, show, destroy
 }

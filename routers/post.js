@@ -13,8 +13,8 @@ router.get('/', blogController.index)
 // rotta del singolo post
 router.get('/:id', blogController.show)
 
-
-
+// rotta per la cancellazione di un post
+router.delete('/:id', blogController.destroy)
 
 
 // esporto il router
