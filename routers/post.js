@@ -4,14 +4,14 @@ const express = require('express');
 const router = express.Router();
 
 // importo il controller
-const postController = require('../controllers/postController');
+const blogController = require('../controllers/blogController');
 
 
 // rotta index
-router.get('/', postController.index)
+router.get('/', blogController.index)
 
 // rotta del singolo post
-router.get('/:id', postController.show)
+router.get('/:id', blogController.show)
 
 
 
