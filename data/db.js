@@ -5,14 +5,18 @@ const mysql = require('mysql2');
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',
+    password: ,
     database: 'db_blog'
 });
 
 // utilizza una variabile per instaurare la connessione
 connection.connect((err) => {
-    if(err) console.log(err);
-    console.log('Connected to MySQL')
+    if(err) {
+        console.log(err)
+    }
+    else{
+        console.log('Connected to MySQL')
+    };
 })
 
 module.exports = connection;

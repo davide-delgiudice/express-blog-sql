@@ -13,7 +13,7 @@ app.use(express.json());
 
 // imposta la rotta base
 app.get("/", (req, res) => {
-    res.send("Benvenuto nella pagina principale dei Post!")
+    res.send("Benvenuto nella pagina principale del Blog!")
 })
 
 // per tutte le richieste che iniziano con Post uso il router postRouter
