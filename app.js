@@ -6,7 +6,7 @@ const app = express();
 // imposta la porta su cui il server ascolterà
 const port = 3000;
 // importo il router nell'app
-const postRouter = require('./router/post.js');
+const postRouter = require('./routers/post.js');
 
 //middleware per il parsing del body delle richieste
 app.use(express.json());
@@ -15,6 +15,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.send("Benvenuto nella pagina principale dei Post!")
 })
+
+// per tutte le richieste che iniziano con Post uso il router postRouter
+app.use("/post", postRouter)
 
 // mette il server in ascolto sulla porta specificata
 app.listen(port, () => {
