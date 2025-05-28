@@ -6,7 +6,7 @@ const app = express();
 // imposta la porta su cui il server ascolterà
 const port = 3000;
 // importo il router nell'app
-const pizzaRouter = require('./router/post.js');
+const postRouter = require('./router/post.js');
 
 //middleware per il parsing del body delle richieste
 app.use(express.json());
