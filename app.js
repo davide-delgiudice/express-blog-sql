@@ -6,6 +6,13 @@ const app = express();
 // imposta la porta su cui il server ascolterà
 const port = 3000;
 
+//middleware per il parsing del body delle richieste
+app.use(express.json());
+
+// imposta la rotta base
+app.get("/", (req, res) => {
+    res.send("Benvenuto nella pagina principale dei Post!")
+})
 
 // mette il server in ascolto sulla porta specificata
 app.listen(port, () => {
