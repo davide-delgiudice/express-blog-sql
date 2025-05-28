@@ -45,6 +45,9 @@ const show = (req, res) => {
             return res.status(500).json({error: "Database query failed"});
         }
 
+        // controllo se il post esiste
+        if(postResults.length === 0) return res.status(404).json({error: "Post not found"});
+
         // recupero il post in posizione 0
         const post = postResults[0];
 
