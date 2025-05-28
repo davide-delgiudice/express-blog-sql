@@ -7,4 +7,11 @@ const connection = mysql.createConnection({
     user: 'root',
     password: '',
     database: 'db_blog'
+});
+
+// utilizza una variabile per instaurare la connessione
+connection.connect(() => {
+    console.log('Connected to MySQL')
 })
+
+module.exports = connection;
