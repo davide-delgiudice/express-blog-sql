@@ -11,7 +11,7 @@ const index = (req, res) => {
     // eseguo la query utilizzando il metodo query della variabile connection
     connection.query(sql, (err, results) => {
         if(err) {
-            return res.status(500).json({error: "Database query failed"});
+            return res.status(500).json({error: "Database query failed"+err});
         }
 
         res.json(results);
@@ -25,18 +25,40 @@ const show = (req, res) => {
     const id = req.params.id;
 
     const sql = `
-    SELECT *
-    FROM posts
-    WHERE id = ?
+        SELECT *
+        FROM posts
+        WHERE id = ?
     `;
 
+    // creo la query che mi recupera i tag del post selezionato
+    const tagSql = `
+        SELECT *
+        FROM tags
+        JOIN post_tag
+        ON tags.id = post_tag.tag_id
+        WHERE post_tag.post_id = ?
+    `
+
     // eseguo la query
-    connection.query(sql, [id],(err, results) => {
+    connection.query(sql, [id], (err, postResults) => {
         if(err) {
             return res.status(500).json({error: "Database query failed"});
         }
 
-        res.json(results);
+        // recupero il post in posizione 0
+        const post = postResults[0];
+
+        // eseguo la query per recuperare i tag
+        connection.query(tagSql, [id], (err, tagResults) => {
+            if(err) {
+                return res.status(500).json({error: "Database query failed"+err});
+            }
+
+            // creo la proprietà tag che viene restituito dalla query
+            post.tags = tagResults;
+
+            res.json(post);
+        })
     })
 };
 
