@@ -27,11 +27,11 @@ const show = (req, res) => {
     const sql = `
     SELECT *
     FROM posts
-    WHERE id = ${id}
+    WHERE id = ?
     `;
 
     // eseguo la query
-    connection.query(sql, (err, results) => {
+    connection.query(sql, [id],(err, results) => {
         if(err) {
             return res.status(500).json({error: "Database query failed"});
         }
